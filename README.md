@@ -113,16 +113,6 @@ You can generate a PDF or an HTML copy of this guide using
     [1, 2, 3].each { |e| puts e }
     ```
 
-    The only exception is when using the exponent operator:
-
-    ```Ruby
-    # bad
-    e = M * c ** 2
-
-    # good
-    e = M * c**2
-    ```
-
 * No spaces after `(`, `[` or before `]`, `)`.
 
     ```Ruby
@@ -181,15 +171,6 @@ You can generate a PDF or an HTML copy of this guide using
       Mailer.deliver(to: 'bob@example.com', from: 'us@example.com', subject: 'Important message', body: source.text)
     end
 
-    # bad (normal indent)
-    def send_mail(source)
-      Mailer.deliver(
-        to: 'bob@example.com',
-        from: 'us@example.com',
-        subject: 'Important message',
-        body: source.text)
-    end
-
     # bad (double indent)
     def send_mail(source)
       Mailer.deliver(
@@ -199,12 +180,22 @@ You can generate a PDF or an HTML copy of this guide using
           body: source.text)
     end
 
-    # good
+    # better
     def send_mail(source)
       Mailer.deliver(to: 'bob@example.com',
                      from: 'us@example.com',
                      subject: 'Important message',
                      body: source.text)
+    end
+
+    # best
+    def send_mail(source)
+      Mailer.deliver(
+        to: 'bob@example.com',
+        from: 'us@example.com',
+        subject: 'Important message',
+        body: source.text
+      )
     end
     ```
 
@@ -320,6 +311,13 @@ You can generate a PDF or an HTML copy of this guide using
     ```
 
 * Avoid multi-line `?:` (the ternary operator), use `if/unless` instead.
+  If you really must use a multi-line ternary expression, line up the `?` and `:`
+
+  ```Ruby
+    some_condition_is_true ?
+              do_something :
+              do_something_else
+  ```
 
 * Favor modifier `if/unless` usage when you have a single-line
   body. Another good alternative is the usage of control flow `and/or`.
@@ -369,9 +367,7 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
-* Don't use parentheses around the condition of an `if/unless/while`,
-  unless the condition contains an assignment (see "Using the return
-  value of `=`" below).
+* Don't use parentheses around the condition of an `if/unless/while`
 
     ```Ruby
     # bad
@@ -438,8 +434,7 @@ You can generate a PDF or an HTML copy of this guide using
 * Prefer `{...}` over `do...end` for single-line blocks.  Avoid using
   `{...}` for multi-line blocks (multiline chaining is always
   ugly). Always use `do...end` for "control flow" and "method
-  definitions" (e.g. in Rakefiles and certain DSLs).  Avoid `do...end`
-  when chaining.
+  definitions" (e.g. in Rakefiles and certain DSLs).
 
     ```Ruby
     names = ['Bozhidar', 'Steve', 'Sarah']
@@ -454,16 +449,6 @@ You can generate a PDF or an HTML copy of this guide using
 
     # good
     names.select { |name| name.start_with?('S') }.map { |name| name.upcase }
-
-    # bad
-    names.select do |name|
-      name.start_with?('S')
-    end.map { |name| name.upcase }
-    ```
-
-    Some will argue that multiline chaining would look OK with the use of {...}, but they should
-    ask themselves - it this code really readable and can't the blocks contents be extracted into
-    nifty methods.
 
 * Avoid `return` where not required.
 
@@ -559,7 +544,7 @@ You can generate a PDF or an HTML copy of this guide using
     ```
 
 * Using the return value of `=` (an assignment) is ok, but surround the
-  assignment with parenthesis.
+  assignment with parenthesis if intent is not obvious.
 
     ```Ruby
     # good - shows intended use of assignment
@@ -741,8 +726,8 @@ syntax.
     counter += 1 # increments counter by one
     ```
 
-* Keep existing comments up-to-date. An outdated is worse than no comment
-at all.
+* Keep existing comments up-to-date. Favor explanatory commit messages instead.
+An outdated comment is worse than no comment at all.
 
 > Good code is like a good joke - it needs no explanation. <br/>
 > -- Russ Olsen
@@ -941,7 +926,7 @@ in accordance with their intended usage. Don't go off leaving
 everything `public` (which is the default). After all we're coding
 in *Ruby* now, not in *Python*.
 * Indent the `public`, `protected`, and `private` methods as much the
-  method definitions they apply to. Leave one blank line above them.
+  method definitions they apply to. Leave one blank line above and below them.
 
     ```Ruby
     class SomeClass
@@ -950,6 +935,7 @@ in *Ruby* now, not in *Python*.
       end
 
       private
+
       def private_method
         # ...
       end
@@ -1180,17 +1166,6 @@ pass parameters to their constructors, that is).
     hash = {}
     ```
 
-* Prefer `%w` to the literal array syntax when you need an array of
-strings.
-
-    ```Ruby
-    # bad
-    STATES = ['draft', 'open', 'closed']
-
-    # good
-    STATES = %w(draft open closed)
-    ```
-
 * Avoid the creation of huge gaps in arrays.
 
     ```Ruby
@@ -1239,13 +1214,6 @@ syntax.
     email_with_name = "#{user.name} <#{user.email}>"
     ```
 
-* Consider padding string interpolation code with space. It more clearly sets the
-  code apart from the string.
-
-    ```Ruby
-    "#{ user.last_name }, #{ user.first_name }"
-    ```
-
 * Prefer single-quoted strings when you don't need string interpolation or
   special symbols such as `\t`, `\n`, `'`, etc.
 
@@ -1255,30 +1223,6 @@ syntax.
 
     # good
     name = 'Bozhidar'
-    ```
-
-* Don't use `{}` around instance variables being interpolated into a
-  string.
-
-    ```Ruby
-    class Person
-      attr_reader :first_name, :last_name
-
-      def initialize(first_name, last_name)
-        @first_name = first_name
-        @last_name = last_name
-      end
-
-      # bad
-      def to_s
-        "#{@first_name} #{@last_name}"
-      end
-
-      # good
-      def to_s
-        "#@first_name #@last_name"
-      end
-    end
     ```
 
 * Avoid using `String#+` when you need to construct large data chunks.
