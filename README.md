@@ -335,18 +335,20 @@ You can generate a PDF or an HTML copy of this guide using
     some_condition and do_something
     ```
 
-* Favor `unless` over `if` for negative conditions (or control
-  flow `or`).
+* When choosing between `unless` and `if`, favor the most natural sounding.
 
     ```Ruby
+    # good
+    do_something unless error
+
     # bad
-    do_something if !some_condition
+    do_something if !error
 
     # good
-    do_something unless some_condition
+    spew if !successful
 
-    # another good option
-    some_condition or do_something
+    # bad - unless you expect your code to fail
+    spew unless successful
     ```
 
 * Never use `unless` with `else`. Rewrite these with the positive case first.
