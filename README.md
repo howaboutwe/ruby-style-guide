@@ -466,6 +466,27 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
+* Prefer `tap` when returning an object from a method chain
+
+    ```Ruby
+    # bad
+    def some_method
+      foo = Foo.new
+      foo.bar = "Bar"
+      foo.baz = "Baz"
+
+      foo
+    end
+
+    # good
+    def some_method
+      Foo.new.tap do |f|
+        f.bar = "Bar"
+        f.baz = "Baz"
+      end
+    end
+    ```
+
 * Avoid `self` where not required.
 
     ```Ruby
