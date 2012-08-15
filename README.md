@@ -542,6 +542,19 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
+   However note that for some classes, like ActiveModel subclasses,
+   the instance is yielded to the initializer making the #tap
+   unnecessary.
+
+   ```Ruby
+   def some_method
+     User.new do |user|
+       user.bar = "Bar"
+       user.baz = "Baz"
+     end
+   end
+   ```
+
 * Avoid `self` where not required.
 
     ```Ruby
