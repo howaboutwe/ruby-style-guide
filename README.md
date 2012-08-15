@@ -163,6 +163,87 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
+* Leave an empty line after `if..end` if the method continues.
+
+    ```Ruby
+    # bad
+    def some_method
+      if condition
+        puts "Yep!"
+      else
+        puts "Nope!"
+      end
+      if something_else
+        puts "Yep!"
+      else
+        puts "Nope!"
+      end
+      puts "Done!"
+    end
+
+    # good
+    def some_method
+      if condition
+        puts "Yep!"
+      else
+        puts "Nope!"
+      end
+
+      if something_else
+        puts "Yep!"
+      else
+        puts "Nope!"
+      end
+
+      puts "Done!"
+    end
+
+* Never leave more than one empty line.
+
+    ```Ruby
+     # bad
+     puts "Hi!"
+     
+     
+     puts "Done!"
+      
+     
+    # bad
+    class Foo
+      def bar
+      end
+      
+    
+    end
+
+    # good
+    class Foo
+      puts "Hi!"
+      puts "Done!"
+
+      def bar
+      end
+    end
+
+* Do not leave empty lines after a class definition or between `end`s
+
+    ```Ruby
+    # bad
+    class Foo
+
+      def bar
+        puts "Bar"
+      end
+
+    end
+
+    # good
+    class Foo
+      def bar
+        puts "Bar"
+      end
+    end
+
 * Align the parameters of a method call if they span over multiple lines.
 
     ```Ruby
