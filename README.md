@@ -163,7 +163,8 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
-* Leave an empty line after `if..end` if the method continues.
+* Leave an empty line after `if..end` if the method continues. Never
+  leave more than one empty line.
 
     ```Ruby
     # bad
@@ -196,33 +197,6 @@ You can generate a PDF or an HTML copy of this guide using
       end
 
       puts "Done!"
-    end
-
-* Never leave more than one empty line.
-
-    ```Ruby
-     # bad
-     puts "Hi!"
-     
-     
-     puts "Done!"
-      
-     
-    # bad
-    class Foo
-      def bar
-      end
-      
-    
-    end
-
-    # good
-    class Foo
-      puts "Hi!"
-      puts "Done!"
-
-      def bar
-      end
     end
 
 * Do not leave empty lines after a class definition or between `end`s
