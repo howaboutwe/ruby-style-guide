@@ -826,6 +826,8 @@ An outdated comment is worse than no comment at all.
 * Avoid writing comments to explain bad code. Refactor the code to
   make it self-explanatory. (Do or do not - there is no try. --Yoda)
 
+* Never push commented out code to master.
+
 ## Annotations
 
 * Annotations should usually be written on the line immediately above
