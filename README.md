@@ -813,7 +813,7 @@ syntax.
     ```
 
 * Prefer `map` over `collect`, `find` over `detect`, `select` over
-  `find_all`, `reduce` over `inject` and `size` over `length`. This is
+  `find_all`, `inject` over `reduce` and `size` over `length`. This is
   not a hard requirement; if the use of the alias enhances
   readability, it's ok to use it. The rhyming methods are inherited from
   Smalltalk and are not common in other programming languages. The
