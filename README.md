@@ -959,7 +959,7 @@ constructor and comparison operators for you.
     end
 
     # better
-    class Person < Struct.new(:first_name, :last_name)
+    Person = Struct.new(:first_name, :last_name) do
     end
     ````
 
