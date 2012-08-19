@@ -437,11 +437,19 @@ You can generate a PDF or an HTML copy of this guide using
       # body omitted
     end
 
-    # ok
+  The one exception is when the condition contains an assignment, to
+  signify intent:
+
+    # bad - should this have been a '=='?
+    if x = self.next_value
+      # body omitted
+    end
+
+    # good
     if (x = self.next_value)
       # body omitted
     end
-    ```
+   ```
 
 * Favor modifier `while/until` usage when you have a single-line
   body.
