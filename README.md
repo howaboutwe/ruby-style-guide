@@ -789,6 +789,19 @@ syntax.
     end
     ```
 
+  This does not apply if the bang signifies exception throwing. In
+  this case, the bang version should be defined in terms of the
+  non-bang one:
+
+  ```Ruby
+  class Thing
+    def save!
+      save or
+        raise Invalid.new(self)
+    end
+  end
+  ```
+
 * When using `reduce` with short blocks, name the arguments `|a, e|`
   (accumulator, element).
 * When defining binary operators, name the argument `other`.
