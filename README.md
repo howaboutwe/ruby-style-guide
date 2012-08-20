@@ -1485,32 +1485,34 @@ syntax.
     end
     ```
 
-* avoid using `method_missing` for metaprogramming. Backtraces become messy; the behavior is not listed in `#methods`; misspelled method calls might silently work (`nukes.launch_state = false`). Consider using delegation, proxy, or `define_method` instead.  If you must, use `method_missing`,
-  - be sure to [also define `respond_to_missing?`](http://blog.marc-andre.ca/2010/11/methodmissing-politely.html)
-  - only catch methods with a well-defined prefix, such as `find_by_*` -- make your code as assertive as possible.
-  - call `super` at the end of your statement
-  - delegate to assertive, non-magical methods:
+* Avoid using `method_missing` if possible. Performance sucks;
+  backtraces become messy; and the behavior is not listed in
+  `#methods`.
+
+* If you must use `method_missing`:
+  * [also define `respond_to_missing?`](http://blog.marc-andre.ca/2010/11/methodmissing-politely.html)
+  * only catch methods with a well-defined prefix, such as `find_by_*` -- make your code as assertive as possible.
+  * call `super` at the end
+  * delegate to assertive, non-magical methods:
 
     ```ruby
     # bad
-    def method_missing?(meth, *args, &block)
-      if /^find_by_(?<prop>.*)/ =~ meth
+    def method_missing(meth, *args, &block)
+      if method =~ /\Afind_by_(?<prop>.*)/
         # ... lots of code to do a find_by
       else
         super
       end
     end
 
-    # good
-    def method_missing?(meth, *args, &block)
-      if /^find_by_(?<prop>.*)/ =~ meth
+    # better
+    def method_missing(meth, *args, &block)
+      if meth =~ /\Afind_by_(?<prop>.*)/
         find_by(prop, *args, &block)
       else
         super
       end
     end
-
-    # best of all, though, would to define_method as each findable attribute is declared
     ```
 
 ## Misc
