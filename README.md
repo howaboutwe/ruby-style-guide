@@ -674,10 +674,6 @@ would happen if the current value happened to be `false`.)
     enabled = true if enabled.nil?
     ```
 
-* Avoid using Perl-style special variables (like `$0-9`, `$``,
-  etc. ). They are quite cryptic and their use in anything but
-  one-liner scripts is discouraged.
-
 * Never put a space between a method name and the opening parenthesis.
 
     ```Ruby
