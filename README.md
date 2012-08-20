@@ -1464,8 +1464,14 @@ syntax.
 
 ## Metaprogramming
 
-* Do not mess around in core classes when writing libraries. (Do not monkey
-patch them.)
+* Do not mess around in core classes when writing libraries. (Do not
+  monkey patch them.) In application code, a small amount is
+  acceptable, provided the changes are truly globally applicable.
+
+* Monkey patch library classes as a last resort, and only to fix
+  library bugs. Send those patches upstream, and include the URL of
+  the pull request in a comment above the monkey patch, so it may one
+  day be removed.
 
 * The block form of `class_eval` is preferable to the string-interpolated form.
   - when you use the string-interpolated form, always supply `__FILE__` and `__LINE__`, so that your backtraces make sense:
