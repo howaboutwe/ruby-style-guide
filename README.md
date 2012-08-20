@@ -731,9 +731,40 @@ syntax.
 * Use `CamelCase` for classes and modules.  (Keep acronyms like HTTP,
   RFC, XML uppercase.)
 * Use `SCREAMING_SNAKE_CASE` for other constants.
+
+* Don't use short (1 or 2 char) variable names unless it's a parameter
+  of a single-line block:
+
+  ```Ruby
+  # ok
+  open(path) { |f| puts f.line }
+
+  # also ok
+  open(path) { |file| puts file.line }
+
+  # bad
+  open(path) do |f|
+    # ...
+  end
+
+  # good
+  open(path) do |file|
+    # ...
+  end
+  ```
+
+* Never shorten names by simply omitting a few letters (e.g. `search`,
+  not `srch`; `response`, not `res`).
+
+* Only abbreviate if the name is extremely long - learn how to
+  autocomplete long names with your editor! If you must abbreviate,
+  favor generalizing the noun over using initials (e.g., shorten
+  `user_search` to `search`, not `us`).
+
 * The names of predicate methods (methods that return a boolean value)
   should end in a question mark.
   (i.e. `Array#empty?`).
+
 * The names of potentially "dangerous" methods (i.e. methods that modify `self` or the
   arguments, `exit!` (doesn't run the finalizers like `exit` does), etc.) should end with an exclamation mark if
   there exists a safe version of that *dangerous* method.
