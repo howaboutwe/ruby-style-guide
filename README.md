@@ -1539,7 +1539,6 @@ syntax.
     Foo.bar = 1
     ```
 
-* Avoid `alias` when `alias_method` will do.
 * Use `OptionParser` for parsing complex command line options and
 `ruby -s` for trivial command line options.
 * Code in a functional way, avoiding mutation when that makes sense.
