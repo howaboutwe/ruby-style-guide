@@ -855,6 +855,24 @@ syntax.
     # best: don't conflate two unrelated actions into one method!
     ```
 
+* Prefer `attributes` or `parameters` to `options` for a final hash
+  parameter if it's not truly optional. A parameter named `options`
+  should always have a default.
+
+    ```Ruby
+    # bad
+    def foo(options)
+    end
+
+    # good
+    def foo(options = {})
+    end
+
+    # good
+    def foo(parameters)
+    end
+    ```
+
 * When using `reduce` with short blocks, name the arguments `|a, e|`
   (accumulator, element).
 * When defining binary operators, name the argument `other`.
