@@ -1473,14 +1473,17 @@ syntax.
   the pull request in a comment above the monkey patch, so it may one
   day be removed.
 
-* The block form of `class_eval` is preferable to the string-interpolated form.
-  - when you use the string-interpolated form, always supply `__FILE__` and `__LINE__`, so that your backtraces make sense:
+* When defining dynamic methods, prefer the string-interpolated form
+  of `class_eval` for performance reasons. Always specify file and
+  line numbers so backtraces make sense. Note that if a heredoc is
+  used, the correct line number is `__LINE__ + 1`.
 
     ```ruby
-    class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
+    class_eval <<-EOS, __FILE__, __LINE__ + 1
+      def #{method}
+      end
+    end
     ```
-
-  - `define_method` is preferable to `class_eval{ def ... }`
 
 * When using `class_eval` (or other `eval`) with string interpolation, add a comment block showing its appearance if interpolated (a practice I learned from the rails code):
 
