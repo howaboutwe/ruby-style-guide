@@ -765,6 +765,9 @@ syntax.
   counterparts are typically one. So log_in and set_up are method
   names, while login and setup are variable names.
 
+* Never use the object's type as a variable name (e.g `hash` or `h`).
+  There is almost certainly a better, more descriptive name.
+
 * The names of predicate methods (methods that return a boolean value)
   should end in a question mark.
   (i.e. `Array#empty?`).
