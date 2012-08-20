@@ -1183,36 +1183,48 @@ in *Ruby* now, not in *Python*.
     end
     ```
 
-* Avoid rescuing the `Exception` class.  This will trap signals and calls to
-  `exit`, requiring you to `kill -9` the process.
+* Always specify which exception classes to rescue, and rescue the
+  most specific exception class possible (unless you're reraising).
 
     ```Ruby
+    # horrible
+    begin
+      # ...
+    rescue Exception
+      # This could be absolutely anything, including an Interrupt,
+      # NoMemoryError, or SystemStackError. Probably don't want that.
+    end
+
     # bad
     begin
-      # calls to exit and kill signals will be caught (except kill -9)
-      exit
-    rescue Exception
-      puts "you didn't really want to exit, right?"
-      # exception handling
+      # ...
+    rescue => e
+      # Rescues StandardError, but more likely the programmer was just
+      # negligent and didn't care.
     end
 
     # good
     begin
-      # a blind rescue rescues from StandardError, not Exception as many
-      # programmers assume.
-    rescue => e
-      # exception handling
+      # ...
+    rescue Timeout::Error => e
+      # ...
     end
-
-    # also good
-    begin
-      # an exception occurs here
-
-    rescue StandardError => e
-      # exception handling
-    end
-
     ```
+
+* Never use the `rescue` statement modifier, as there is no way to
+  specify which exception classes to rescue.
+
+  ```Ruby
+  # bad
+  do_something rescue nil
+
+  # good
+  begin
+    do_something
+  rescue SomeException
+    # ...
+  end
+  ```
 
 * Put more specific exceptions higher up the rescue chain, otherwise
   they'll never be rescued from.
