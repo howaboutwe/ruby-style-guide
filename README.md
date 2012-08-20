@@ -830,6 +830,31 @@ syntax.
   end
   ```
 
+* Avoid "flag" parameters - write a separate method or take an options
+  hash instead.
+
+    ```Ruby
+    # bad
+    def offers(reload = false)
+      self.reload if reload
+      # ...
+    end
+
+    # better
+    def offers(options = {})
+      self.reload if options[:reload]
+      # ...
+    end
+
+    # better
+    def reload_with_offers
+      self.reload
+      offers
+    end
+
+    # best: don't conflate two unrelated actions into one method!
+    ```
+
 * When using `reduce` with short blocks, name the arguments `|a, e|`
   (accumulator, element).
 * When defining binary operators, name the argument `other`.
