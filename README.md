@@ -761,6 +761,10 @@ syntax.
   favor generalizing the noun over using initials (e.g., shorten
   `user_search` to `search`, not `us`).
 
+* Phrasal verbs (methods) are two words, while their noun (variable)
+  counterparts are typically one. So log_in and set_up are method
+  names, while login and setup are variable names.
+
 * The names of predicate methods (methods that return a boolean value)
   should end in a question mark.
   (i.e. `Array#empty?`).
