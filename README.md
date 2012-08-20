@@ -688,9 +688,6 @@ would happen if the current value happened to be `false`.)
   always use parentheses in the method invocation. For example, write
 `f((3 + 2) + 1)`.
 
-* Always run the Ruby interpreter with the `-w` option so it will warn
-you if you forget either of the rules above!
-
 * When the keys of your hash are symbols use the Ruby 1.9 hash literal
 syntax.
 
