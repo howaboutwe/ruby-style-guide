@@ -151,17 +151,36 @@ You can generate a PDF or an HTML copy of this guide using
 
     ```Ruby
     def some_method
-      data = initialize(options)
+      something = find_something(1)
+      something_else = find_something_else(2)
 
-      data.manipulate!
+      first = something.manipulate!
+      second = something_else.frobnicate
 
-      data.result
+      first + second
     end
 
     def some_method
       result
     end
     ```
+
+  When methods are short (say, less than 3 lines, or when each
+  "paragraph" is only one line), then it's ok to omit the blank
+  lines. This is common in simple specs:
+
+    ```Ruby
+    describe User do
+      it "should be wibblable" do
+        user = User.find(1)
+        user.wibble
+        user.should be_wibbled
+      end
+    end
+    ```
+
+  The objective is to have all lines in a "paragraph" to have the same
+  weight.
 
 * Leave an empty line after `if..end` if the method continues. Never
   leave more than one empty line.
