@@ -468,19 +468,6 @@ You can generate a PDF or an HTML copy of this guide using
     end
    ```
 
-* Favor modifier `while/until` usage when you have a single-line
-  body.
-
-    ```Ruby
-    # bad
-    while some_condition
-      do_something
-    end
-
-    # good
-    do_something while some_condition
-    ```
-
 * Favor `until` over `while` for negative conditions.
 
     ```Ruby
