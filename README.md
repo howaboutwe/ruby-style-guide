@@ -1495,15 +1495,15 @@ syntax.
 * Use `OptionParser` for parsing complex command line options and
 `ruby -s` for trivial command line options.
 * Don't use File.join to piece together file names from static strings.
-   ```Ruby
+    ```Ruby
     # bad
     path = File.join(Rails.root, 'config', 'blah.yml')
 
-    # better - works because Rails.root is a Pathname
-    path = Rails.root.join('config/blah.yml')
-
-    # best
+    # good
     path = "#{Rails.root}/config/blah.yml"
+
+    # good - works because Rails.root is a Pathname
+    path = Rails.root.join('config/blah.yml')
     ```
 
     (Contrary to popular belief, this runs just fine on Windows.)
