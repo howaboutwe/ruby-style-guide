@@ -1494,22 +1494,19 @@ syntax.
 
 * Use `OptionParser` for parsing complex command line options and
 `ruby -s` for trivial command line options.
-* Don't use File.join to piece together file names unless:
-  * Segments may contain a trailing '/' (usually optional - most file
-    operations clean given paths of duplicate slashes)
-  * You're displaying the resulting string to a user (required on
-    Windows)
-
-    ```Ruby
+* Don't use File.join to piece together file names from static strings.
+   ```Ruby
     # bad
     path = File.join(Rails.root, 'config', 'blah.yml')
 
-    # good
+    # better - works because Rails.root is a Pathname
+    path = Rails.root.join('config/blah.yml')
+
+    # best
     path = "#{Rails.root}/config/blah.yml"
     ```
 
-    (Contrary to popular belief, even if this was actually run on
-    Windows, it'd run just fine.)
+    (Contrary to popular belief, this runs just fine on Windows.)
 
 * Code in a functional way, avoiding mutation when that makes sense.
 * Avoid needless metaprogramming.
