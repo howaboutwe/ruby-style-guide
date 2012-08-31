@@ -923,8 +923,6 @@ An outdated comment is worse than no comment at all.
   the relevant code.
 * The annotation keyword is followed by a colon and a space, then a note
   describing the problem.
-* If multiple lines are required to describe the problem, subsequent
-  lines should be indented two spaces after the `#`.
 
     ```Ruby
     def bar
@@ -949,11 +947,6 @@ An outdated comment is worse than no comment at all.
 * Use `FIXME` to note broken code that needs to be fixed.
 * Use `OPTIMIZE` to note slow or inefficient code that may cause
   performance problems.
-* Use `HACK` to note code smells where questionable coding practices
-  were used and should be refactored away.
-* Use `REVIEW` to note anything that should be looked at to confirm it
-  is working as intended. For example: `REVIEW: Are we sure this is how the
-  client does X currently?`
 * Use other custom annotation keywords if it feels appropriate, but be
   sure to document them in your project's `README` or similar.
 
