@@ -957,6 +957,84 @@ An outdated comment is worse than no comment at all.
 * Try to make your classes as
   [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\))
   as possible.
+
+* Important methods should be near the top of a class to allow people
+  unfamiliar with the class to easily open up the file and get a general idea
+  of how the class works.
+
+  Submethods should be under the place where they are called. They don't need
+  to be directly under, but if you see a method call, you shouldn't need to
+  look above the method call to find the method. Use private to hide methods
+  that shouldn't be called from outside the class.
+
+  I have heard this described as newspaper article ordering. Articles will
+  generally have the most important information in that paragraph in order to
+  facilitate scanning. You don't write an article about a new store and bury
+  the paragragh about what the store does and where it is halfway down.
+    ```ruby
+    # bad
+
+    PhotoResizer = Struct.new(:photo, :new_x, :new_y) do
+
+      def change_dimensions
+        change_x_dimension
+        change_y_dimension
+      end
+
+      def save_to_disk
+        baz
+      end
+
+      def change_y_dimesion
+        bar
+      end
+
+      def resize_photo
+        change_dimensions
+        save_to_disk
+      end
+
+      def change_x_dimesion
+        foo
+      end
+
+    end
+
+    # good: the first method you see is the main method and submethods are
+    # defined after they are called
+
+    PhotoResizer = Struct.new(:photo, :new_x, :new_y) do
+
+      def resize_photo
+        change_dimensions
+        save_to_disk
+      end
+
+      private
+
+      def change_dimensions
+        change_x_dimension
+        change_y_dimension
+      end
+
+      def change_x_dimesion
+        foo
+      end
+
+      def change_y_dimesion
+        bar
+      end
+
+      def save_to_disk
+        baz
+      end
+
+    end
+    ```
+  This is hard to enforce in
+  [god classes](http://en.wikipedia.org/wiki/God_object)
+  like User, but in classes following SOLID this should be fairly easy.
+
 * Always supply a proper `to_s` method for classes that represent
   domain objects.
 
