@@ -766,6 +766,9 @@ syntax.
   should end in a question mark.
   (i.e. `Array#empty?`).
 
+* Prefer predicate method names excluding `is_`
+  (i.e. `Array#empty?` instead of `Array.is_empty?`)
+
 * The names of potentially "dangerous" methods (i.e. methods that modify `self` or the
   arguments, `exit!` (doesn't run the finalizers like `exit` does), etc.) should end with an exclamation mark if
   there exists a safe version of that *dangerous* method.
