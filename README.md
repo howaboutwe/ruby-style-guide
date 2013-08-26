@@ -273,7 +273,7 @@ You can generate a PDF or an HTML copy of this guide using
     end
     ```
 
-* Keep lines fewer than 80 characters.
+* Keep lines fewer than 120 characters.
 * Avoid trailing whitespace (Remember `whitespace`)
 
 ## Syntax
